@@ -1,0 +1,95 @@
+<zk xmlns="http://www.zkoss.org/2005/zul"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.zkoss.org/2005/zul http://www.zkoss.org/2005/zul/zul.xsd">
+	<?page title="Psychometric Assessments"?>
+	<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" arg0="editPsychometricAssessmentsWin"?>
+	<?component name="error" extends="label" class="com.loquatic.cerescan.view.ErrorLabel"?>
+	<window title="Psychometric Assessments" border="normal"
+		id="editPsychometricAssessmentsWin" width="900px"
+		apply="com.loquatic.cerescan.controller.patient.EditPatientPsychAssessController">
+		<caption>
+			<toolbarbutton label="Help"  href="../../../manual/index.php/Patient_Psychometric_Assessments" target="manual"/>
+		</caption>
+		<error id="errLbl" style="color:#DD7870" multiline="true" />
+		<label id="successLbl" style="color:green" multiline="true" />
+		<groupbox mold="3d">
+			<caption label="Edit Patient Psychometric Assessments" />
+			<listbox id="psychometricAssessmentLb"
+				model="@{controller.psychometricAssessments}"
+				selectedItem="@{controller.selectedPsychometricAssessment}">
+				<listhead>
+					<listheader label="Type" />
+					<listheader label="Short Description" />
+					<listheader label="File" />
+				</listhead>
+				<listitem self="@{each='psychometricAssessments'}"
+					value="@{psychometricAssessments}">
+					<listcell
+						label="@{psychometricAssessments.psychometricAssessmentType.name}" />
+					<listcell
+						label="@{psychometricAssessments.description}" />
+					<listcell
+						label="@{psychometricAssessments.fileName}" />
+				</listitem>
+			</listbox>
+			<separator />
+			<button id="downloadBtn" label="Download" visible="false" />
+			<button id="deleteBtn" label="Delete Selection"
+				visible="false" />
+			<separator />
+			<grid>
+				<rows>
+					<row>
+						<cell>Type:</cell>
+						<cell>
+							<listbox id="psychometricAssessmentTypeLb"
+								rows="1" mold="select"
+								model="@{controller.allPsychometricAssessmentTypes}">
+								<listitem
+									self="@{each=psychometricAssessmentType}"
+									value="@{psychometricAssessmentType}">
+									<listcell
+										label="@{psychometricAssessmentType.name}" />
+								</listitem>
+							</listbox>
+						</cell>
+					</row>
+					<row>
+						<cell>Short Description</cell>
+						<cell>
+							<textbox id="descriptionTb" />
+						</cell>
+					</row>
+					<row>
+						<cell>
+							<vbox>
+								<image id="thumbnailImg" width="100px"
+									height="100px" visible="false" />
+								<label id="fileNameLbl" />
+							</vbox>
+						</cell>
+						<cell>
+							<fileupload id="fileupload" label="Upload" />
+						</cell>
+					</row>
+				</rows>
+			</grid>
+			<separator />
+			<button id="addBtn" label="Add" sclass="update" />
+		</groupbox>
+		<separator />
+		<groupbox id="miniGb" mold="3d" visible="false">
+			<caption label="MINI" />
+			<listbox checkmark="true" multiple="true"
+				model="@{controller.allMinis}"
+				selectedItem="@{controller.selectedMinis, converter=com.loquatic.cerescan.common.SelectedItemsConverterV3}"
+				tooltiptext="Hold down CTRL to select multiple checkboxes">
+				<listitem self="@{each=mini}" value="@{mini}">
+					<listcell label="@{mini.name}" />
+				</listitem>
+			</listbox>
+			<separator />
+			<button id="updateBtn" label="Update" sclass="update" />
+		</groupbox>
+	</window>
+</zk>

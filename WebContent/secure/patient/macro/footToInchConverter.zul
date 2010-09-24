@@ -1,0 +1,44 @@
+<?page title="Foot To Inch Converter" contentType="text/html;charset=UTF-8"?>
+<zk>
+	<window id="convertWind" title="Foot To Inch Converter"
+		border="normal" width="200px">
+		<label id="result" value="" />
+		<grid>
+			<rows>
+				<row>
+					<cell width="50px">Foot:</cell>
+					<cell>
+						<intbox id="footIb" cols="4"
+							constraint="no empty" />
+						(f) .
+						<intbox id="inchIb" cols="3"
+							constraint="no empty" />
+						(i) format: ###.#"
+					</cell>
+				</row>
+				<row>
+					<cell colspan="2">
+						<button id="convertBtn" label="Convert">
+							<attribute name="onClick">
+	{
+		for (Object com : desktop.getComponents()) {
+			if (com instanceof Intbox) {
+				Intbox ib = (Intbox) com;
+				if (ib.getId().equals("heighIb")) {
+					int x = footIb.getValue();
+					int y = inchIb.getValue();
+					int z = (x * 12) + y;
+					ib.setValue(z);
+				}
+			}
+		}
+	}
+	convertWind.detach();
+</attribute>
+						</button>
+					</cell>
+				</row>
+			</rows>
+		</grid>
+	</window>
+</zk>

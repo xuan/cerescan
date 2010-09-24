@@ -1,0 +1,170 @@
+<zk xmlns="http://www.zkoss.org/2005/zul"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.zkoss.org/2005/zul http://www.zkoss.org/2005/zul/zul.xsd">
+	<?page title="Edit Patient Medication"?>
+	<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" arg0="editMedicationWin"?>
+	<?component name="error" extends="label" class="com.loquatic.cerescan.view.ErrorLabel"?>
+	<window title="Edit Patient Medication" border="normal"
+		id="editMedicationWin" width="900px"
+		apply="com.loquatic.cerescan.controller.patient.EditPatientMedicationController">
+		<caption>
+			<toolbarbutton label="Help"  href="../../../manual/index.php/Patient_Medication" target="manual"/>
+		</caption>
+		<error id="errLbl" style="color:#DD7870" multiline="true" />
+		<label id="successLbl" style="color:green" multiline="true" />
+		<groupbox mold="3d">
+			<caption label="Current Medications" />
+			<listbox id="currentMedicationsLb"
+				model="@{controller.currentMedications}">
+				<listhead>
+					<listheader label="Name" />
+					<listheader label="Dose" />
+					<listheader label="Schedule" />
+				</listhead>
+				<listitem self="@{each='currentMedication'}"
+					value="@{currentMedication}">
+					<listcell
+						label="@{currentMedication.medicine.name}" />
+					<listcell>
+						<label
+							value="@{currentMedication.strength.name}" />
+						<label value="@{currentMedication.dosage.name}" />
+					</listcell>
+					<listcell
+						label="@{currentMedication.schedule.name}" />
+				</listitem>
+			</listbox>
+			<separator />
+			<button id="currentMedicationsDeleteBtn"
+				label="Delete Selection" visible="false" />
+			<separator />
+			<grid>
+				<rows>
+					<row>
+						<cell>Name:</cell>
+						<cell>
+							<combobox id="currentMedicineCb"
+								model="@{controller.allMedicines}">
+								<comboitem self="@{each=medicine}"
+									label="@{medicine.name}" value="@{medicine}" focus="true" />
+							</combobox>
+							*
+						</cell>
+					</row>
+					<row>
+						<cell>Dose:</cell>
+						<cell>
+							<textbox id="currentStrengthTb" cols="5" />
+							<listbox id="currentDosageLb" mold="select"
+								model="@{controller.allDosage}">
+								<listitem self="@{each=dosage}"
+									label="@{dosage.name}" value="@{dosage}" />
+							</listbox>
+						</cell>
+					</row>
+					<row>
+						<cell>Schedule:</cell>
+						<cell>
+							<listbox id="currentScheduleLb"
+								model="@{controller.allSchedule}" mold="select">
+								<listitem self="@{each=schedule}"
+									label="@{schedule.name}" value="@{schedule}" />
+							</listbox>
+						</cell>
+					</row>
+					<row>
+						<cell colspan="2">
+							<button id="currentAddBtn" label="Add" />
+						</cell>
+					</row>
+				</rows>
+			</grid>
+		</groupbox>
+		<separator />
+		<groupbox mold="3d">
+			<caption label="Past Medications" />
+			<listbox id="pastMedicationsLb"
+				model="@{controller.pastMedications}">
+				<listhead>
+					<listheader label="Name" />
+					<listheader label="Dose" />
+					<listheader label="Schedule" />
+					<listheader label="Effectiveness" />
+					<listheader label="Adverse Reaction" />
+				</listhead>
+				<listitem self="@{each='pastMedication'}"
+					value="@{pastMedication}">
+					<listcell label="@{pastMedication.medicine.name}" />
+					<listcell>
+						<label value="@{pastMedication.strength}" />
+						<label value="@{pastMedication.dosage.name}" />
+					</listcell>
+					<listcell label="@{pastMedication.schedule.name}" />
+					<listcell label="@{pastMedication.effective.name}" />
+					<listcell label="@{pastMedication.adverseReaction}" />
+				</listitem>
+			</listbox>
+			<separator />
+			<button id="pastMedicationsDeleteBtn"
+				label="Delete Selection" visible="false" />
+			<separator />
+			<grid>
+				<rows>
+					<row>
+						<cell>Name:</cell>
+						<cell>
+							<combobox id="pastMedicineCb"
+								model="@{controller.allMedicines}">
+								<comboitem self="@{each=medicine}"
+									label="@{medicine.name}" value="@{medicine}" />
+							</combobox>
+							*
+						</cell>
+					</row>
+					<row>
+						<cell>Dose:</cell>
+						<cell>
+							<textbox id="pastStrengthTb" cols="5" />
+							<listbox id="pastDosageLb" mold="select"
+								model="@{controller.allDosage}">
+								<listitem self="@{each=dosage}"
+									label="@{dosage.name}" value="@{dosage}" />
+							</listbox>
+						</cell>
+					</row>
+					<row>
+						<cell>Schedule:</cell>
+						<cell>
+							<listbox id="pastScheduleLb"
+								model="@{controller.allSchedule}" mold="select">
+								<listitem self="@{each=schedule}"
+									label="@{schedule.name}" value="@{schedule}" />
+							</listbox>
+						</cell>
+					</row>
+					<row>
+						<cell>Effective:</cell>
+						<cell>
+							<listbox id="pastEffectiveLb" mold="select"
+								model="@{controller.allEffective}">
+								<listitem self="@{each=effective}"
+									label="@{effective.name}" value="@{effective}" />
+							</listbox>
+						</cell>
+					</row>
+					<row>
+						<cell>Adverse Reaction:</cell>
+						<cell>
+							<textbox id="adverseReactionTb" cols="40" />
+						</cell>
+					</row>
+					<row>
+						<cell colspan="2">
+							<button id="pastAddBtn" label="Add" />
+						</cell>
+					</row>
+				</rows>
+			</grid>
+		</groupbox>
+	</window>
+</zk>

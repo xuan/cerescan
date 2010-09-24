@@ -1,0 +1,46 @@
+<zk xmlns="http://www.zkoss.org/2005/zul"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.zkoss.org/2005/zul http://www.zkoss.org/2005/zul/zul.xsd">
+	<!-- $id$ -->
+	<?page title="Hospitalization"?>
+	<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" arg0="editHospitalizationWin"?>
+	<?component name="error" extends="label" class="com.loquatic.cerescan.view.ErrorLabel"?>
+	<window title="Hospitalization" border="normal"
+		id="editHospitalizationWin" width="900px"
+		apply="com.loquatic.cerescan.controller.patient.EditPatientHospitalizationController">
+		<caption>
+			<toolbarbutton label="Help" href="../../../manual/index.php/Patient_Hospitalization" target="manual"/>
+		</caption>
+		<error id="errLbl" style="color:#DD7870" multiline="true" />
+		<label id="successLbl" style="color:green" multiline="true" />
+		<groupbox mold="3d">
+			<caption label="Patient Hospitalization" />
+			<listbox id="hospitalizationLb"
+				model="@{controller.hospitalizations}">
+				<listhead>
+					<listheader label="Name" />
+				</listhead>
+					<listitem self="@{each='hospitalization'}"
+						value="@{hospitalization}">
+						<listcell label="@{hospitalization.description}" />
+					</listitem>
+			</listbox>
+			<separator />
+			<button id="deleteBtn" label="Delete Selection"
+				visible="false" />
+			<separator />
+			<grid>
+				<rows>
+					<row>
+						<cell>
+							<textbox id="hospitalizationTb" cols="60" />
+						</cell>
+						<cell width="45px">
+							<button id="addBtn" label="Add" />
+						</cell>
+					</row>
+				</rows>
+			</grid>
+		</groupbox>
+	</window>
+</zk>

@@ -1,0 +1,204 @@
+<zk xmlns="http://www.zkoss.org/2005/zul"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.zkoss.org/2005/zul http://www.zkoss.org/2005/zul/zul.xsd">
+	<!-- $Id$ -->
+	<?page title="SPECT Imaging"?>
+	<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" arg0="editSpectImagingWin"?>
+	<?component name="error" extends="label" class="com.loquatic.cerescan.view.ErrorLabel"?>
+	<window title="SPECT Imaging" border="normal"
+		id="editSpectImagingWin" width="900px"
+		apply="com.loquatic.cerescan.controller.patient.EditPatientSpectImagingController">
+		<caption>
+			<toolbarbutton label="Help"  href="../../../manual/index.php/Patient_SPECT_Imaging" target="manual"/>
+		</caption>
+		<error id="errLbl" style="color:#DD7870" multiline="true" />
+		<label id="successLbl" style="color:green" multiline="true" />
+		<groupbox mold="3d">
+			<caption label="Concentration Scan" />
+			<grid>
+				<rows>
+					<row>
+						<cell>Date:</cell>
+						<cell>
+							<datebox format="MM/dd/yyyy"
+								value="@{controller.sessionInfo.csDate}" />
+						</cell>
+					</row>
+					<row>
+						<cell>Dose:</cell>
+						<cell>
+							<textbox
+								value="@{controller.sessionInfo.csDose}" />
+							(mCi)
+						</cell>
+					</row>
+					<row>
+						<cell>Counts:</cell>
+						<cell>
+							<doublebox
+								value="@{controller.sessionInfo.csCounts}" />
+							(Million)
+
+						</cell>
+					</row>
+					<row>
+						<cell>Injection site:</cell>
+						<cell>
+							<listbox rows="1" mold="select"
+								selectedItem="@{controller.sessionInfo.csInjectionSiteSide}">
+								<listitem label="Right" value="Right" />
+								<listitem label="Left" value="Left" />
+							</listbox>
+							<listbox rows="1" mold="select"
+								model="@{controller.allCsInjectionSites}"
+								selectedItem="@{controller.sessionInfo.csInjectionSite}">
+								<listitem self="@{each=csInjectionSite}"
+									value="@{csInjectionSite}">
+									<listcell
+										label="@{csInjectionSite.name}" />
+								</listitem>
+							</listbox>
+						</cell>
+					</row>
+					<row>
+						<cell>Time of Injection:</cell>
+						<cell>
+							<timebox
+								value="@{controller.sessionInfo.csTimeOfInjection}"
+								format="hh:mma" cols="10" />
+						</cell>
+					</row>
+					<row>
+						<cell>Time of Scan:</cell>
+						<cell>
+							<timebox
+								value="@{controller.sessionInfo.csTimeOfScan}" format="hh:mma"
+								cols="10" />
+						</cell>
+					</row>
+					<row>
+						<cell>Concentration Task:</cell>
+						<cell>
+							<listbox id="concentrationTaskLb" rows="1"
+								mold="select" model="@{controller.allScannedFormTypes}"
+								selectedItem="@{controller.sessionInfo.concentrationTask}">
+								<listitem
+									self="@{each=concentrationTask}"
+									value="@{concentrationTask}">
+									<listcell
+										label="@{concentrationTask.name}" />
+								</listitem>
+							</listbox>
+						</cell>
+					</row>
+					<row>
+						<cell>Technologist's Initials:</cell>
+						<cell>
+							<textbox id="csTechnologistsInitialsTb"
+								value="@{controller.sessionInfo.csTechnologistsInitials}" />
+							<button id="csSigBtn" label="Sign" />
+						</cell>
+					</row>
+				</rows>
+			</grid>
+		</groupbox>
+		<separator />
+		<groupbox mold="3d">
+			<caption label="Baseline Scan " />
+			<grid>
+				<rows>
+					<row>
+						<cell>Date:</cell>
+						<cell>
+							<datebox format="MM/dd/yyyy"
+								value="@{controller.sessionInfo.bsDate}" />
+						</cell>
+					</row>
+					<row>
+						<cell>Dose:</cell>
+						<cell>
+							<textbox
+								value="@{controller.sessionInfo.bsDose}" />
+							(mCi)
+						</cell>
+					</row>
+					<row>
+						<cell>Counts:</cell>
+						<cell>
+							<doublebox
+								value="@{controller.sessionInfo.bsCounts}" />
+							(Million)
+
+						</cell>
+					</row>
+					<row>
+						<cell>Injection site:</cell>
+						<cell>
+							<listbox rows="1" mold="select"
+								selectedItem="@{controller.sessionInfo.bsInjectionSiteSide}">
+								<listitem label="Right" value="Right" />
+								<listitem label="Left" value="Left" />
+							</listbox>
+							<listbox rows="1" mold="select"
+								model="@{controller.allBsInjectionSites}"
+								selectedItem="@{controller.sessionInfo.bsInjectionSite}">
+								<listitem self="@{each=bsInjectionSite}"
+									value="@{bsInjectionSite}">
+									<listcell
+										label="@{bsInjectionSite.name}" />
+								</listitem>
+							</listbox>
+						</cell>
+					</row>
+					<row>
+						<cell>Time of Injection:</cell>
+						<cell>
+							<timebox
+								value="@{controller.sessionInfo.bsTimeOfInjection}"
+								format="hh:mma" cols="10" />
+						</cell>
+					</row>
+					<row>
+						<cell>Time of Scan:</cell>
+						<cell>
+							<timebox
+								value="@{controller.sessionInfo.bsTimeOfScan}" format="hh:mma"
+								cols="10" />
+						</cell>
+					</row>
+					<row>
+						<cell>Technologist's Initials:</cell>
+						<cell>
+							<textbox id="bsTechnologistsInitialsTb"
+								value="@{controller.sessionInfo.bsTechnologistInitials}" />
+							<button id="bsSigBtn" label="Sign" />
+						</cell>
+					</row>
+				</rows>
+			</grid>
+		</groupbox>
+		<separator />
+		<separator />
+		<groupbox mold="3d">
+			<caption label="Reading Physicians" />
+			<listbox id="readingPhysicianLb"
+				model="@{controller.allReadingPhysicians}" checkmark="true"
+				multiple="true" width="200px"
+				selectedItem="@{controller.selectedReadingPhysicians, converter=com.loquatic.cerescan.common.SelectedItemsConverterV3}"
+				tooltiptext="Hold down CTRL to select multiple checkboxes">
+				<listitem self="@{each=readingPhysicians}"
+					value="@{readingPhysicians}">
+					<listcell label="@{readingPhysicians.name}" />
+				</listitem>
+			</listbox>
+		</groupbox>
+		<separator />
+		<groupbox mold="3d">
+			<caption label="Protocol Exceptions/Notes" />
+			<textbox value="@{controller.sessionInfo.protocol}"
+				cols="60" rows="10" />
+		</groupbox>
+		<separator />
+		<button id="updateBtn" label="Update" sclass="update" />
+	</window>
+</zk>

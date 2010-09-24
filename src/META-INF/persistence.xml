@@ -1,0 +1,98 @@
+<persistence xmlns="http://java.sun.com/xml/ns/persistence"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/persistence persistence_1_0.xsd"
+	version="1.0">
+
+
+	<persistence-unit name="cerescan-mysql"
+		transaction-type="RESOURCE_LOCAL">
+		<provider>
+			org.hibernate.ejb.HibernatePersistence
+        </provider>
+        
+		<!--  mapped super classes -->
+		<class>com.loquatic.cerescan.api.entities.Address</class>
+		<class>com.loquatic.cerescan.api.entities.Allergy</class>
+		<class>com.loquatic.cerescan.api.entities.Attorney</class>
+		<class>com.loquatic.cerescan.api.entities.CerescanBaseEntity</class>
+		<class>com.loquatic.cerescan.api.entities.FamilyMember</class>
+		<class>com.loquatic.cerescan.api.entities.HospitalizationsSurgeries</class>
+		<class>com.loquatic.cerescan.api.entities.Person</class>
+		<class>com.loquatic.cerescan.api.entities.Medication</class>
+		<class>com.loquatic.cerescan.api.entities.OtherImaging</class>
+		<class>com.loquatic.cerescan.api.entities.Patient</class>
+		<class>com.loquatic.cerescan.api.entities.Physician</class>
+		<class>com.loquatic.cerescan.api.entities.PsychometricAssessment</class>
+		<class>com.loquatic.cerescan.api.entities.Role</class>
+		<class>com.loquatic.cerescan.api.entities.ScannedForm</class>
+		<class>com.loquatic.cerescan.api.entities.SessionInfo</class>
+		<class>com.loquatic.cerescan.api.entities.TraumaticBrainInjury</class>
+		<class>com.loquatic.cerescan.api.entities.UploadEntity</class>
+		<class>com.loquatic.cerescan.api.entities.User</class>
+
+
+		<!-- lookups -->
+
+		<class>com.loquatic.cerescan.api.entities.lookups.AllergyType</class>
+		<class>com.loquatic.cerescan.api.entities.lookups.BirthTrauma</class>
+		<class>com.loquatic.cerescan.api.entities.lookups.BrainArea</class>
+		<class>com.loquatic.cerescan.api.entities.lookups.BrainHemisphere</class>
+		<class>com.loquatic.cerescan.api.entities.lookups.BsInjectionSite</class>
+		<class>com.loquatic.cerescan.api.entities.lookups.ClinicalSite</class>
+		<class>com.loquatic.cerescan.api.entities.lookups.ConcentrationTaskType</class>
+		<class>com.loquatic.cerescan.api.entities.lookups.CsInjectionSite</class>
+		<class>com.loquatic.cerescan.api.entities.lookups.Degree</class>
+		<class>com.loquatic.cerescan.api.entities.lookups.DevelopmentMilestone</class>
+		<class>com.loquatic.cerescan.api.entities.lookups.DevelopmentTrauma</class>
+		<class>com.loquatic.cerescan.api.entities.lookups.Dosage</class>
+		<class>com.loquatic.cerescan.api.entities.lookups.DrugAbuse</class>
+		<class>com.loquatic.cerescan.api.entities.lookups.EducationLevel</class>
+		<class>com.loquatic.cerescan.api.entities.lookups.Effective</class>
+		<class>com.loquatic.cerescan.api.entities.lookups.EmploymentStatus</class>
+		<class>com.loquatic.cerescan.api.entities.lookups.Ethnicity</class>
+		<class>com.loquatic.cerescan.api.entities.lookups.FamilyMemberType</class>
+		<class>com.loquatic.cerescan.api.entities.lookups.IncomingDiagnoses</class>
+		<class>com.loquatic.cerescan.api.entities.lookups.InjuryType</class>
+		<class>com.loquatic.cerescan.api.entities.lookups.LookUp</class>
+		<class>com.loquatic.cerescan.api.entities.lookups.LossConsciousness</class>
+		<class>com.loquatic.cerescan.api.entities.lookups.MedicationType</class>
+		<class>com.loquatic.cerescan.api.entities.lookups.Medicine</class>
+		<class>com.loquatic.cerescan.api.entities.lookups.Mini</class>
+		<class>com.loquatic.cerescan.api.entities.lookups.OtherImagingType</class>
+		<class>com.loquatic.cerescan.api.entities.lookups.OutgoingDiagnoses</class>
+		<class>com.loquatic.cerescan.api.entities.lookups.PhysicalInjury</class>
+		<class>com.loquatic.cerescan.api.entities.lookups.PsychometricAssessmentType</class>
+    <class>com.loquatic.cerescan.api.entities.lookups.RecreationalDrug</class>
+		<class>com.loquatic.cerescan.api.entities.lookups.ReadingPhysician</class>
+		<class>com.loquatic.cerescan.api.entities.lookups.RelationshipStatus</class>
+		<class>com.loquatic.cerescan.api.entities.lookups.ScannedFormType</class>
+		<class>com.loquatic.cerescan.api.entities.lookups.Schedule</class>
+		<class>com.loquatic.cerescan.api.entities.lookups.Symptom</class>
+		<class>com.loquatic.cerescan.api.entities.lookups.TraumaticAmnesia</class>
+		<class>com.loquatic.cerescan.api.entities.lookups.TraumaticBrainInjuryType</class>
+
+		<properties>
+		    <property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5InnoDBDialect" /> 
+			<property name="hibernate.connection.driver_class" value="com.mysql.jdbc.Driver" />
+			<property name="hibernate.connection.url"
+				value="jdbc:mysql://localhost:3306/cerescan?autoReconnect=true" />
+			<property name="hibernate.connection.username" value="sysman" />
+			<property name="hibernate.connection.password" value="sysman" />
+			<property name="hibernate.connection.provider_class" value="org.hibernate.connection.C3P0ConnectionProvider"/>
+			<property name="hibernate.hbm2ddl.auto" value="update"/>
+			<property name="hibernate.c3p0.min_size" value="5"/>
+			<property name="hibernate.c3p0.max_size" value="30"/>
+			<property name="hibernate.c3p0.timeout" value="5000"/>
+			<property name="hibernate.c3p0.max_statements" value="100"/>
+			<property name="hibernate.c3p0.acquire_increment" value="5"/>
+			<property name="hibernate.c3p0.idle_test_period" value="100"/>
+			<property name="hibernate.c3p0.preferredTestQuery" value="SELECT 1"/>
+      <property name="hibernate.show_sql" value="true"/>
+      <property name="hibernate.generate_statistics" value="false"/>
+      <property name="hibernate.use_sql_comments" value="false"/>
+		</properties>
+
+	</persistence-unit>
+
+</persistence>
+		           

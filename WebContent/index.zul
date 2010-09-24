@@ -1,0 +1,54 @@
+<?xml version="1.0"?>
+<?page id="login" title="LOGIN"?>
+<zk>
+	<separator />
+	<separator />
+	<separator />
+	<separator />
+
+	<div align="center">
+		<window title="Login" border="normal" width="500px">
+			<html style="color:#DD7870"
+				if="${not empty param.login_error}">
+				<![CDATA[ Your login attempt was not successful, try
+				again.<br/> Reason:
+				${SPRING_SECURITY_LAST_EXCEPTION.message} ]]>			
+    </html>
+			<html style="color:green" if="${not empty param.logout}">
+				<![CDATA[ You are logged out ]]>		
+    </html>
+			<h:form id="f" name="f" action="j_spring_security_check"
+				method="POST" xmlns:h="http://www.w3.org/1999/xhtml">
+				<groupbox mold="3d">
+					<caption
+						label="Please Enter your Username and Password" />
+					<grid>
+						<rows>
+							<row>
+								<cell>User:</cell>
+								<cell>
+									<textbox id="username"
+										name="j_username" focus="true"/>
+								</cell>
+							</row>
+							<row>
+								<cell>Password:</cell>
+								<cell>
+									<textbox id="passowrd"
+										type="password" name="j_password" />
+								</cell>
+							</row>
+							<row spans="2">
+								<hbox>
+									<h:input type="submit"
+										value="Login" />
+									<h:input type="reset" value="Reset" />
+								</hbox>
+							</row>
+						</rows>
+					</grid>
+				</groupbox>
+			</h:form>
+		</window>
+	</div>
+</zk>

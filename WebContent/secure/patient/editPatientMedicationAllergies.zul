@@ -1,0 +1,98 @@
+<zk xmlns="http://www.zkoss.org/2005/zul"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.zkoss.org/2005/zul http://www.zkoss.org/2005/zul/zul.xsd">
+	<?page title="Medication Allergies"?>
+	<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" arg0="editMedicationAllergiesWin"?>
+	<?component name="error" extends="label" class="com.loquatic.cerescan.view.ErrorLabel"?>
+	<window title="Medication Allergies" border="normal"
+		id="editMedicationAllergiesWin" width="900px"
+		apply="com.loquatic.cerescan.controller.patient.EditPatientMedicationAllergiesController">
+		<caption>
+			<toolbarbutton label="Help" href="../../../manual/index.php/Patient_Allergies" target="manual"/>
+		</caption>
+		<error id="errLbl" style="color:#DD7870" multiline="true" />
+		<label id="successLbl" style="color:green" multiline="true" />
+		<groupbox mold="3d">
+			<caption label="Patient Medication Allergies" />
+			<listbox id="medicationAllergiesLb"
+				model="@{controller.medicationAllergies}">
+				<listhead>
+					<listheader label="Medication" />
+					<listheader label="Adverse Reaction" />
+				</listhead>
+				<listitem self="@{each='medicationAllergies'}"
+					value="@{medicationAllergies}">
+					<listcell
+						label="@{medicationAllergies.description}" />
+					<listcell
+						label="@{medicationAllergies.adverseReaction}" />
+				</listitem>
+			</listbox>
+			<separator />
+			<button id="medicationAllergiesDeleteBtn"
+				label="Delete Selection" visible="false" />
+			<separator />
+			<grid>
+				<columns>
+					<column label="Medication" />
+					<column label="Adverse Reaction" />
+					<column width="100px" />
+				</columns>
+				<rows>
+					<row>
+						<cell>
+							<textbox id="medicationAllergyTb" cols="50"/>
+						</cell>
+						<cell>
+							<textbox id="medicationAdverseReactionTb" cols="50"/>
+						</cell>
+						<cell>
+							<button id="medicationAllergyAddBtn"
+								label="Add" />
+						</cell>
+					</row>
+				</rows>
+			</grid>
+		</groupbox>
+		<separator />
+		<groupbox mold="3d">
+			<caption label="Other Patient Allergies" />
+			<listbox id="otherAllergiesLb"
+				model="@{controller.otherAllergies}">
+				<listhead>
+					<listheader label="Allergen" />
+					<listheader label="Adverse Reaction" />
+				</listhead>
+				<listitem self="@{each='otherAllergies'}"
+					value="@{otherAllergies}">
+					<listcell label="@{otherAllergies.description}" />
+					<listcell label="@{otherAllergies.adverseReaction}"/>
+				</listitem>
+			</listbox>
+			<separator />
+			<button id="otherAllergyDeleteBtn" label="Delete Selection"
+				visible="false" />
+			<separator />
+			<grid>
+				<columns>
+					<column label="Allergen" />
+					<column label="Adverse Reaction" />
+					<column width="100px" />
+				</columns>
+				<rows>
+					<row>
+						<cell>
+							<textbox id="otherAllergyTb" cols="50"/>
+						</cell>
+						<cell>
+							<textbox id="otherAllergyAdverseReactionTb" cols="50"/>
+						</cell>
+						<cell>
+							<button id="otherAllergyAddBtn" label="Add" />
+						</cell>
+					</row>
+				</rows>
+			</grid>
+		</groupbox>
+	</window>
+</zk>

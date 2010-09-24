@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:security="http://www.springframework.org/schema/security"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="
+		 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+		        http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.0.xsd">
+
+	<!--
+       - Secure the page per the URL pattern
+       -->
+	<security:http auto-config="true">
+		<security:intercept-url pattern="/secure/**"
+			access="IS_AUTHENTICATED_REMEMBERED" />
+		<security:intercept-url pattern="/**"
+			access="IS_AUTHENTICATED_ANONYMOUSLY" />
+		<!-- use own login page rather than the default one -->
+		<security:form-login login-page="/index.zul"
+			authentication-failure-url="/index.zul?login_error=1"
+			default-target-url="/secure/index.zul" />
+		<security:session-management>
+			<security:concurrency-control
+				max-sessions="1" />
+		</security:session-management>
+	</security:http>
+
+	<bean id="userManager"
+		class="com.loquatic.cerescan.api.persistence.managers.UserManager" />
+	<security:authentication-manager>
+		<security:authentication-provider
+			user-service-ref="userManager" />
+	</security:authentication-manager>
+
+</beans>

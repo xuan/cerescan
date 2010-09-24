@@ -1,0 +1,234 @@
+<zk xmlns="http://www.zkoss.org/2005/zul"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.zkoss.org/2005/zul http://www.zkoss.org/2005/zul/zul.xsd">
+	<?page title="Edit Attorney Information"?>
+	<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" arg0="editAttorneyWin"?>
+	<?component name="error" extends="label" class="com.loquatic.cerescan.view.ErrorLabel"?>
+	<window title="Manage Attorney Information" border="normal"
+		id="editAttorneyWin" width="750px"
+		apply="com.loquatic.cerescan.controller.global.EditAttorneyController">
+		<caption>
+			<toolbarbutton label="Help"  href="../../../manual/index.php/Manage_Attorney_Information" target="manual"/>
+		</caption>
+		<error id="errLbl" style="color:#DD7870" multiline="true" />
+		<label id="successLbl" style="color:green" multiline="true"
+			action="onshow: anima.fade(#{self}); onhide: anima.fade(#{self})" />
+		<groupbox mold="3d">
+			<caption label="Attorney Search" />
+			<grid>
+				<rows>
+					<row>
+						<cell>Search for Attorney Last Name:</cell>
+						<cell>
+							<textbox id="searchLastNameTb" focus="true" />
+						</cell>
+						<cell>
+							<button id="searchLastNameBtn"
+								label="Search" />
+						</cell>
+					</row>
+				</rows>
+			</grid>
+		</groupbox>
+		<div id="searchResult" visible="false"
+			action="onshow: anima.fade(#{self}); onhide: anima.fade(#{self})">
+			<separator />
+			<groupbox mold="3d">
+				<caption label="Attorney Search Result" />
+				<listbox id="searchResultLb"
+					model="@{controller.attornies}">
+					<listhead sizable="true">
+						<listheader width="150px">Last Name</listheader>
+						<listheader width="150px">
+							First Name
+						</listheader>
+						<listheader width="150px">Firm Name</listheader>
+					</listhead>
+					<listitem self="@{each='attorney'}"
+						value="@{attorney}">
+						<listcell label="@{attorney.lastName}" />
+						<listcell label="@{attorney.firstName}" />
+						<listcell label="@{attorney.firmName}" />
+					</listitem>
+				</listbox>
+			</groupbox>
+		</div>
+		<separator />
+		<groupbox mold="3d">
+			<caption label=" Attorney" />
+			<grid>
+				<rows>
+					<row>
+						<cell width="100px">Last Name:*</cell>
+						<cell>
+							<textbox id="lastNameTb"
+								value="@{controller.attorney.lastName}" />
+						</cell>
+						<cell width="100px">First Name:*</cell>
+						<cell>
+							<textbox id="firstNameTb"
+								value="@{controller.attorney.firstName}" />
+						</cell>
+					</row>
+					<row>
+						<cell>Firm Name:*</cell>
+						<cell colspan="3">
+							<textbox id="firmNameTb"
+								value="@{controller.attorney.firmName}" />
+						</cell>
+					</row>
+					<row>
+						<cell>Phone:</cell>
+						<cell>
+							<textbox id="phoneTb"
+								value="@{controller.attorney.workPhone}" />
+						</cell>
+						<cell>Fax:</cell>
+						<cell>
+							<textbox id="faxTb"
+								value="@{controller.attorney.faxPhone}" />
+						</cell>
+					</row>
+					<row>
+						<cell>Email:</cell>
+						<cell colspan="3">
+							<textbox id="emailTb"
+								value="@{controller.attorney.email1}" />
+						</cell>
+					</row>
+				</rows>
+			</grid>
+		</groupbox>
+		<separator />
+		<groupbox mold="3d">
+			<caption label="Attorney Address" />
+			<grid id="addressInput">
+				<rows>
+					<row>
+						<cell width="100px">
+							<label value="Address" />
+							:
+						</cell>
+						<cell>
+							<textbox id="street1Tb" cols="50"
+								maxlength="100" value="@{controller.address.street1}" />
+						</cell>
+					</row>
+					<row>
+						<cell></cell>
+						<cell>
+							<textbox id="street2Tb" cols="50"
+								maxlength="100" value="@{controller.address.street2}" />
+						</cell>
+					</row>
+					<row>
+						<cell>
+
+						</cell>
+						<cell>
+							<label value="City" />
+							:
+							<textbox id="cityTb" cols="12"
+								maxlength="20" value="@{controller.address.city}" />
+
+							<label value="State" />
+							:
+
+							<listbox id="stateLb" rows="1" mold="select"
+								selectedItem="@{controller.address.state}">
+								<listitem value=""
+									label="Select a State" />
+								<listitem value="AL" label="Alabama" />
+								<listitem value="AK" label="Alaska" />
+								<listitem value="AZ" label="Arizona" />
+								<listitem value="AR" label="Arkansas" />
+								<listitem value="CA" label="California" />
+								<listitem value="CO" label="Colorado" />
+								<listitem value="CT"
+									label="Connecticut" />
+								<listitem value="DE" label="Delaware" />
+								<listitem value="DC"
+									label="District Of Columbia" />
+								<listitem value="FL" label="Florida" />
+								<listitem value="GA" label="Georgia" />
+								<listitem value="HI" label="Hawaii" />
+								<listitem value="ID" label="Idaho" />
+								<listitem value="IL" label="Illinois" />
+								<listitem value="IN" label="Indiana" />
+								<listitem value="IA" label="Iowa" />
+								<listitem value="KS" label="Kansas" />
+								<listitem value="KY" label="Kentucky" />
+								<listitem value="LA" label="Louisiana" />
+								<listitem value="ME" label="Maine" />
+								<listitem value="MD" label="Maryland" />
+								<listitem value="MA"
+									label="Massachusetts" />
+								<listitem value="MI" label="Michigan" />
+								<listitem value="MN" label="Minnesota" />
+								<listitem value="MS"
+									label="Mississippi" />
+								<listitem value="MO" label="Missouri" />
+								<listitem value="MT" label="Montana" />
+								<listitem value="NE" label="Nebraska" />
+								<listitem value="NV" label="Nevada" />
+								<listitem value="NH"
+									label="New Hampshire" />
+								<listitem value="NJ" label="New Jersey" />
+								<listitem value="NM" label="New Mexico" />
+								<listitem value="NY" label="New York" />
+								<listitem value="NC"
+									label="North Carolina" />
+								<listitem value="ND"
+									label="North Dakota" />
+								<listitem value="OH" label="Ohio" />
+								<listitem value="OK" label="Oklahoma" />
+								<listitem value="OR" label="Oregon" />
+								<listitem value="PA"
+									label="Pennsylvania" />
+								<listitem value="RI"
+									label="Rhode Island" />
+								<listitem value="SC"
+									label="South Carolina" />
+								<listitem value="SD"
+									label="South Dakota" />
+								<listitem value="TN" label="Tennessee" />
+								<listitem value="TX" label="Texas" />
+								<listitem value="UT" label="Utah" />
+								<listitem value="VT" label="Vermont" />
+								<listitem value="VA" label="Virginia" />
+								<listitem value="WA" label="Washington" />
+								<listitem value="WV"
+									label="West Virginia" />
+								<listitem value="WI" label="Wisconsin" />
+								<listitem value="WY" label="Wyoming" />
+							</listbox>
+							<label value="Zip" />
+							:
+							<textbox id="zipCodeTb" cols="7"
+								maxlength="10" value="@{controller.address.zipCode}" />
+						</cell>
+					</row>
+					<row>
+						<cell></cell>
+						<cell>
+							<label value="Country" />
+							:
+							<textbox id="countryTb"
+								value="@{controller.address.country}" />
+
+							<label value="City Code" />
+							:
+							<textbox id="cityCodeTb" cols="7"
+								maxlength="10" value="@{controller.address.cityCode}" />
+						</cell>
+					</row>
+				</rows>
+			</grid>
+		</groupbox>
+		<separator />
+		<button id="addBtn" label="Add" sclass="update" />
+		<button id="updateBtn" label="Update" visible="false"
+			sclass="update" />
+		<button id="clearBtn" label="Clear" visible="false" />
+	</window>
+</zk>

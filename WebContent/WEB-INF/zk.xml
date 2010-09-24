@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+	<!--
+	Created by ZK Studio
+-->
+
+<zk>
+	<log>
+		<log-base>org.zkoss</log-base>
+	</log>
+	<device-config>
+		<device-type>ajax</device-type>
+		<timeout-uri>/index.zul</timeout-uri>
+		<!--
+			An empty URL can cause the browser to reload the same URL
+		-->
+	</device-config>
+	<library-property>
+		<name>org.zkoss.zul.Button.mold</name>
+		<value>trendy</value>
+	</library-property>
+	<system-config>
+		<disable-event-thread>false</disable-event-thread>
+	</system-config>
+
+	<desktop-config>
+		<theme-uri>/css/cerescan.css</theme-uri>
+	</desktop-config>
+
+	<system-config>
+		<max-upload-size>1000000</max-upload-size>
+	</system-config>
+
+	<system-config>
+		<disable-event-thread />
+	</system-config>
+
+	<listener>
+		<description>ThreadLocal Synchronization Listener</description>
+		<listener-class>org.zkoss.zkplus.util.ThreadLocalListener</listener-class>
+	</listener>
+
+	<preference>
+		<name>ThreadLocal</name>
+		<value>
+			org.springframework.security.context.ThreadLocalSecurityContextHolderStrategy=contextHolder
+		</value>
+	</preference>
+
+</zk>

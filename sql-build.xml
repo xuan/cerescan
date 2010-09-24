@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="Cerescan Data insert" default="load" basedir=".">
+
+  <target name="create-db">
+  	<sql
+  	    driver="com.mysql.jdbc.Driver"
+  	    url="jdbc:mysql://localhost:3306/cerescan"
+  	    userid="root"
+  	    password=""
+  	    src="resources/create-db.sql"
+  	    classpath="WebContent/WEB-INF/lib/mysql-connector-java-5.1.13-bin.jar"/>
+  </target>
+	
+  <target name="load">
+  <sql
+    driver="com.mysql.jdbc.Driver"
+    url="jdbc:mysql://localhost:3306/cerescan"
+    userid="sysman"
+    password="sysman"
+    classpath="WebContent/WEB-INF/lib/mysql-connector-java-5.1.13-bin.jar">
+  	<path>
+  	    <fileset dir="resources">
+  	      <include name="lookups.sql"/>
+  	    	<include name="meds.sql"/>
+  	    	<include name="account.sql"/>
+  	    </fileset>
+  	  </path>
+  	</sql>
+ 
+  </target>
+	
+	<target name="dumpdb">
+		 <delete file="resources/create-db.sql"/>
+	   <exec executable="/usr/local/mysql-5.0.67-osx10.5-x86/bin/mysqldump"
+	   	     output="resources/create-db.sql">
+	      <arg value="--add-drop-database"/>
+	      <arg value="--add-drop-table"/>
+	      <arg value="--no-data"/>
+	   	  <arg value="--host=localhost"/>
+	   	  <arg value="--port=3306"/>
+	   	  <arg value="--user=root"/>
+	   	  <arg value="--password="/>
+	   	  <arg value="cerescan"/>
+	   	  
+	   </exec>
+  </target>
+
+</project>

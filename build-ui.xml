@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<project default="dist">
+	<property name="tmp.dir" value="tmp"/>
+	<property name="dist.dir" value="dist"/>
+	<property name="war.file" value="cerescan.war"/>
+	<property name="build.dir" value="${tmp.dir}/WEB-INF/classes"/>
+	<property name="src.dir" value="src"/>
+	<path id="compile.class.path">
+		<fileset dir="WebContent/WEB-INF/lib">
+			<include name="*.jar"/>
+		</fileset>
+	</path>
+	<target name="dist" depends="clean, compile, jar"/>
+	<target name="clean">
+		<delete dir="${tmp.dir}"/>
+		<mkdir dir="${tmp.dir}"/>
+		<mkdir dir="${build.dir}"/>
+		<delete dir="${dist.dir}"/>
+		<mkdir dir="${dist.dir}"/>
+	</target>
+	<target name="compile">
+		<copy todir="tmp">
+			<fileset dir="WebContent"/>
+		</copy>
+		<javac destdir="${build.dir}" srcdir="${src.dir}" debug="true" classpathref="compile.class.path"/>
+	</target>
+	<target name="jar">
+		<jar destfile="${dist.dir}/${war.file}" basedir="${tmp.dir}"/>
+	</target>
+</project>

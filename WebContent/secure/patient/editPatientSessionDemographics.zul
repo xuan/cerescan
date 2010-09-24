@@ -1,0 +1,242 @@
+<zk xmlns="http://www.zkoss.org/2005/zul"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.zkoss.org/2005/zul http://www.zkoss.org/2005/zul/zul.xsd">
+	<?page title="Edit Patient Session Demographics Information"?>
+	<?component name="error" extends="label" class="com.loquatic.cerescan.view.ErrorLabel"?>
+	<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" arg0="./editPatientSessionWin"?>
+	<window title="Edit Patient Session Demographics Information"
+		border="normal" id="editPatientSessionWin" width="900px"
+		apply="com.loquatic.cerescan.controller.patient.EditPatientSessionDemographicsController">
+		<caption>
+			<toolbarbutton label="Help"  href="../../../manual/index.php/Patient_Session_Demographics_Information" target="manual"/>
+		</caption>
+		<error id="errLbl" style="color:#DD7870" multiline="true" />
+		<label id="successLbl" style="color:green" multiline="true" />
+		<groupbox mold="3d">
+			<caption label="Patient Session Information" />
+			<grid>
+				<rows>
+					<row>
+						<cell>
+							<label value="Clinic Sites" />
+							:
+						</cell>
+						<cell colspan="3">
+							<listbox id="clinicalSiteLb"
+								model="@{controller.allClinicalSites}" checkmark="true"
+								multiple="true" width="200px"
+								selectedItem="@{controller.selectedClinicalSites, converter=com.loquatic.cerescan.common.SelectedItemsConverterV3}">
+								<listitem
+									self="@{each=allClinicalSites}" value="@{allClinicalSites}">
+									<listcell
+										label="@{allClinicalSites.name}" />
+								</listitem>
+							</listbox>
+						</cell>
+					</row>
+					<row>
+						<cell>
+							<label value="Height (in feet and inches)" />
+							:
+						</cell>
+						<cell>
+							<doublebox id="heighIb" focus="true"
+								cols="5" maxlength="5" value="@{controller.sessionInfo.height}" />
+							format: (#.#)
+						</cell>
+						<cell>
+							<label value="Weight (in pounds)" />
+							:
+						</cell>
+						<cell>
+							<intbox cols="5" maxlength="5"
+								value="@{controller.sessionInfo.weight}" />
+						</cell>
+					</row>
+					<row>
+						<cell>
+							<label value="Eye Dominance" />
+							:
+						</cell>
+						<cell colspan="3">
+							<radiogroup
+								value="@{controller.sessionInfo.eyeDominance}"
+								selectedItem="@{controller.sessionInfo.eyeDominance}">
+								<radio label="Right" value="R" />
+								<radio label="Left" value="L" />
+								<radio label="Undetermined" value="" />
+							</radiogroup>
+						</cell>
+					</row>
+					<row>
+						<cell>
+							<label value="Hand Dominance" />
+							:
+						</cell>
+						<cell colspan="3">
+							<radiogroup
+								value="@{controller.sessionInfo.handDominance}"
+								selectedItem="@{controller.sessionInfo.handDominance}">
+								<radio label="Right" value="R" />
+								<radio label="Left" value="L" />
+							</radiogroup>
+						</cell>
+					</row>
+					<row>
+						<cell>
+							<label value="Ethnicity/Race" />
+							:
+						</cell>
+						<!--
+							This is an example of how to make a dropdown list
+						-->
+						<cell colspan="3">
+							<listbox id="ethnicityLb" rows="1"
+								mold="select" model="@{controller.allEthnicities}"
+								selectedItem="@{controller.sessionInfo.ethnicity}">
+								<listitem self="@{each=ethnicity}"
+									label="@{ethnicity.name}" value="@{ethnicity}" />
+							</listbox>
+						</cell>
+					</row>
+					<row>
+						<cell>
+							<label value="Relationship Status" />
+							:
+						</cell>
+						<cell colspan="3">
+							<listbox id="relationshipStatusLb" rows="1"
+								mold="select" model="@{controller.allRelationshipStatuses}"
+								selectedItem="@{controller.sessionInfo.relationshipStatus}">
+								<listitem
+									self="@{each=relationshipStatus}"
+									value="@{relationshipStatus}">
+									<listcell
+										label="@{relationshipStatus.name}" />
+								</listitem>
+							</listbox>
+						</cell>
+					</row>
+					<row>
+						<cell>
+							<label value="Employment Status" />
+							:
+						</cell>
+						<cell colspan="3">
+							<listbox id="employmentStatusLb" rows="1"
+								mold="select" model="@{controller.allEmploymentStatus}"
+								selectedItem="@{controller.sessionInfo.employmentStatus}">
+								<listitem
+									self="@{each=employmentStatus}" value="@{employmentStatus}">
+									<listcell
+										label="@{employmentStatus.name}" />
+								</listitem>
+							</listbox>
+						</cell>
+					</row>
+					<row>
+						<cell>
+							<label value="Veteran Status" />
+							:
+						</cell>
+						<cell colspan="3">
+							<listbox id="veteranStatusLb"
+								model="@{controller.allVeteranStatus}" rows="1" mold="select"
+								selectedItem="@{controller.sessionInfo.veteranStatus}">
+								<listitem self="@{each=veteranStatus}"
+									value="@{veteranStatus}">
+									<listcell
+										label="@{veteranStatus.name}" />
+								</listitem>
+							</listbox>
+						</cell>
+					</row>
+					<row id="combatHistoryRw" visible="false">
+						<cell>
+							<label value="Combat History" />
+						</cell>
+						<cell colspan="3">
+							<vbox>
+								<hbox>
+									<label value="Dates" />
+									:
+									<textbox id="combatDateTb"
+										value="@{controller.sessionInfo.combatDate}" />
+								</hbox>
+								<hbox>
+									<label value="Where" />
+									:
+									<textbox id="combatLocationTb"
+										value="@{controller.sessionInfo.combatLocation}" />
+								</hbox>
+							</vbox>
+						</cell>
+					</row>
+					<row>
+						<cell>
+							<label value="Highest level of education" />
+							:
+						</cell>
+						<cell colspan="3">
+							<listbox id="educationStatusLb" rows="1"
+								mold="select" model="@{controller.allEducationLevels}"
+								selectedItem="@{controller.sessionInfo.educationLevel}">
+								<listitem self="@{each=educationLevel}"
+									value="@{educationLevel}">
+									<listcell
+										label="@{educationLevel.name}" />
+								</listitem>
+							</listbox>
+						</cell>
+					</row>
+					<row>
+						<cell>Clinical Indication for Referral:</cell>
+						<cell colspan="3"><textbox id="clinicalIndicationTb"
+										value="@{controller.sessionInfo.clinicalIndication}" cols="50"/></cell>
+					</row>
+					<row>
+						<cell>
+							<label value="Patient Classification" />
+							:
+						</cell>
+						<cell colspan="3">
+							<radiogroup id="forensicRg"
+								value="@{controller.sessionInfo.forensicPatient}"
+								selectedItem="@{controller.sessionInfo.forensicPatient}">
+								<radio label="Forensic Patient"
+									onCheck="forensicRw.setVisible(true);" value="F" />
+								<radio label="Neuropsychiatric Patient"
+									onCheck="forensicRw.setVisible(false);" value="N" />
+							</radiogroup>
+						</cell>
+					</row>
+					<row id="forensicRw" visible="false">
+						<cell>Type of Injuries</cell>
+						<cell colspan="3">
+							<vbox>
+								<listbox id="injuryTypeLb" rows="1"
+									mold="select" model="@{controller.allInjuryTypes}"
+									selectedItem="@{controller.sessionInfo.injuryType}">
+									<listitem self="@{each=injuryType}"
+										value="@{injuryType}">
+										<listcell
+											label="@{injuryType.name}" />
+									</listitem>
+								</listbox>
+								Description:
+								<textbox id="injuryDescriptionTb"
+									cols="50" rows="5"
+									value="@{controller.sessionInfo.injuryDescription}" />
+								Workers' Compensation Case Number:
+								<textbox id="caseNumberTb"
+									value="@{controller.sessionInfo.caseNumber}" />
+							</vbox>
+						</cell>
+					</row>
+				</rows>
+			</grid>
+		</groupbox>
+		<separator />
+		<button id="btn" sclass="update" />
+	</window>
+</zk>

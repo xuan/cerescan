@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<?page title="Create New Patient" contentType="text/html;charset=UTF-8"?>
+<?component name="error" extends="label" class="com.loquatic.cerescan.view.ErrorLabel"?>
+<?taglib uri="http://www.zkoss.org/dsp/web/core" prefix="c"?>
+<zk>
+	<window id="crpWin" title="Create New Patient" border="normal"
+		width="500px"
+		apply="com.loquatic.cerescan.controller.patient.CreateNewPatientController">
+		<error id="errLbl" style="color:#DD7870" multiline="true" />
+		<groupbox mold="3d">
+			<caption label="Please Enter the Patient Information" />
+			<grid>
+				<rows>
+					<row>
+						<cell>Last Name:*</cell>
+						<cell>
+							<textbox id="lastNameTb" cols="10"
+								focus="true" />
+						</cell>
+						<cell>First Name:*</cell>
+						<cell>
+							<textbox id="firstNameTb" cols="10"
+								 />
+						</cell>
+					</row>
+					<row>
+						<cell>MR #:*</cell>
+						<cell colspan="3">
+							<textbox id="mrTb" cols="10" />
+						</cell>
+					</row>
+					<row>
+						<cell colspan="4">
+							<button id="createBtn" label="Create" mold="trendy"/>
+						</cell>
+					</row>
+				</rows>
+			</grid>
+		</groupbox>
+	</window>
+</zk>

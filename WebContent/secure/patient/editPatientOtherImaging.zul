@@ -1,0 +1,77 @@
+<zk xmlns="http://www.zkoss.org/2005/zul"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.zkoss.org/2005/zul http://www.zkoss.org/2005/zul/zul.xsd">
+	<?page title="Edit Patient Other Imaging"?>
+	<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" arg0="editOtherImagingsWin"?>
+	<?component name="error" extends="label" class="com.loquatic.cerescan.view.ErrorLabel"?>
+	<window title="Other Imaging" border="normal"
+		id="editOtherImagingsWin" width="900px"
+		apply="com.loquatic.cerescan.controller.patient.EditPatientOtherImageController">
+		<caption>
+			<toolbarbutton label="Help" href="../../../manual/index.php/Patient_Other_Imaging" target="manual"/>
+		</caption>
+		<error id="errLbl" style="color:#DD7870" multiline="true" />
+		<label id="successLbl" style="color:green" multiline="true" />
+		<groupbox mold="3d">
+			<caption label="Edit Patient Other Imaging" />
+			<listbox id="otherImagingLb"
+				model="@{controller.otherImagings}"
+				selectedItem="@{controller.selectedOtherImaging}">
+				<listhead>
+					<listheader label="Type" />
+					<listheader label="Short Description" />
+					<listheader label="File" />
+				</listhead>
+				<listitem self="@{each='otherImagings'}"
+					value="@{otherImagings}">
+					<listcell
+						label="@{otherImagings.otherImagingType.name}" />
+					<listcell label="@{otherImagings.description}" />
+					<listcell label="@{otherImagings.fileName}" />
+				</listitem>
+			</listbox>
+			<separator />
+			<button id="downloadBtn" label="Download" visible="false" />
+			<button id="deleteBtn" label="Delete Selection"
+				visible="false" />
+			<separator />
+			<grid>
+				<rows>
+					<row>
+						<cell>Type:</cell>
+						<cell>
+							<listbox id="otherImagingTypeLb" rows="1"
+								mold="select" model="@{controller.allOtherImagingTypes}">
+								<listitem
+									self="@{each=otherImagingType}" value="@{otherImagingType}">
+									<listcell
+										label="@{otherImagingType.name}" />
+								</listitem>
+							</listbox>
+						</cell>
+					</row>
+					<row>
+						<cell>Short Description</cell>
+						<cell>
+							<textbox id="descriptionTb" />
+						</cell>
+					</row>
+					<row>
+						<cell>
+							<vbox>
+								<image id="thumbnailImg" width="100px"
+									height="100px" visible="false" />
+								<label id="fileNameLbl" />
+							</vbox>
+						</cell>
+						<cell>
+							<fileupload id="fileupload" label="Upload" />
+						</cell>
+					</row>
+				</rows>
+			</grid>
+			<separator />
+			<button id="addBtn" label="Add" sclass="update" />
+		</groupbox>
+	</window>
+</zk>

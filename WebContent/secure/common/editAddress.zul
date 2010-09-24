@@ -1,0 +1,111 @@
+<?page title="Edit Address" contentType="text/html;charset=UTF-8"?>
+<zk>
+	<grid id="addressInput">
+		<rows>
+			<row>
+				<cell width="100px">
+					<label value="Address" />
+					:
+				</cell>
+				<cell>
+					<textbox id="street1Tb" cols="50" maxlength="100"
+						value="@{controller.address.street1}" />
+				</cell>
+			</row>
+			<row>
+				<cell></cell>
+				<cell>
+					<textbox id="street2Tb" cols="50" maxlength="100"
+						value="@{controller.address.street2}" />
+				</cell>
+			</row>
+			<row>
+				<cell></cell>
+				<cell>
+					<label value="City" />
+					:
+					<textbox id="cityTb" cols="12" maxlength="20"
+						value="@{controller.address.city}" />
+
+					<label value="State" />
+					:
+
+					<listbox id="stateLb" rows="1" mold="select"
+						selectedItem="@{controller.address.state}">
+						<listitem value="" label="Select a State" />
+						<listitem value="AL" label="Alabama" />
+						<listitem value="AK" label="Alaska" />
+						<listitem value="AZ" label="Arizona" />
+						<listitem value="AR" label="Arkansas" />
+						<listitem value="CA" label="California" />
+						<listitem value="CO" label="Colorado" />
+						<listitem value="CT" label="Connecticut" />
+						<listitem value="DE" label="Delaware" />
+						<listitem value="DC"
+							label="District Of Columbia" />
+						<listitem value="FL" label="Florida" />
+						<listitem value="GA" label="Georgia" />
+						<listitem value="HI" label="Hawaii" />
+						<listitem value="ID" label="Idaho" />
+						<listitem value="IL" label="Illinois" />
+						<listitem value="IN" label="Indiana" />
+						<listitem value="IA" label="Iowa" />
+						<listitem value="KS" label="Kansas" />
+						<listitem value="KY" label="Kentucky" />
+						<listitem value="LA" label="Louisiana" />
+						<listitem value="ME" label="Maine" />
+						<listitem value="MD" label="Maryland" />
+						<listitem value="MA" label="Massachusetts" />
+						<listitem value="MI" label="Michigan" />
+						<listitem value="MN" label="Minnesota" />
+						<listitem value="MS" label="Mississippi" />
+						<listitem value="MO" label="Missouri" />
+						<listitem value="MT" label="Montana" />
+						<listitem value="NE" label="Nebraska" />
+						<listitem value="NV" label="Nevada" />
+						<listitem value="NH" label="New Hampshire" />
+						<listitem value="NJ" label="New Jersey" />
+						<listitem value="NM" label="New Mexico" />
+						<listitem value="NY" label="New York" />
+						<listitem value="NC" label="North Carolina" />
+						<listitem value="ND" label="North Dakota" />
+						<listitem value="OH" label="Ohio" />
+						<listitem value="OK" label="Oklahoma" />
+						<listitem value="OR" label="Oregon" />
+						<listitem value="PA" label="Pennsylvania" />
+						<listitem value="RI" label="Rhode Island" />
+						<listitem value="SC" label="South Carolina" />
+						<listitem value="SD" label="South Dakota" />
+						<listitem value="TN" label="Tennessee" />
+						<listitem value="TX" label="Texas" />
+						<listitem value="UT" label="Utah" />
+						<listitem value="VT" label="Vermont" />
+						<listitem value="VA" label="Virginia" />
+						<listitem value="WA" label="Washington" />
+						<listitem value="WV" label="West Virginia" />
+						<listitem value="WI" label="Wisconsin" />
+						<listitem value="WY" label="Wyoming" />
+					</listbox>
+					<label value="Zip" />
+					:
+					<textbox id="zipCodeTb" cols="7" maxlength="10"
+						value="@{controller.address.zipCode}" />
+				</cell>
+				</row>
+				<row>
+				<cell></cell>
+				<cell>
+					<label value="Country" />
+					:
+					<textbox id="countryTb"
+						value="@{controller.address.country}" />
+
+					<label value="City Code" />
+					:
+					<textbox id="cityCodeTb" cols="7" maxlength="10"
+						value="@{controller.address.cityCode}" />
+				</cell>
+			</row>
+		</rows>
+	</grid>
+</zk>

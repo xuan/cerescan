@@ -1,0 +1,264 @@
+<zk xmlns="http://www.zkoss.org/2005/zul"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.zkoss.org/2005/zul http://www.zkoss.org/2005/zul/zul.xsd">
+	<!-- $id$ -->
+	<?page title="Hospitalization and Surgeries"?>
+	<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" arg0="editPatientSubstanceUseWin"?>
+	<?component name="error" extends="label" class="com.loquatic.cerescan.view.ErrorLabel"?>
+	<window title="Substance Use" border="normal"
+		id="editPatientSubstanceUseWin" width="900px"
+		apply="com.loquatic.cerescan.controller.patient.EditPatientSubstanceUseController">
+		<caption>
+			<toolbarbutton label="Help" href="../../../manual/index.php/Patient_Substance_Use" target="manual"/>
+		</caption>
+		<error id="errLbl" style="color:#DD7870" multiline="true" />
+		<label id="successLbl" style="color:green" multiline="true" />
+		<groupbox mold="3d">
+			<caption label="Patient Substance Use Information" />
+			<grid>
+				<rows>
+					<row>
+						<cell width="200px">
+							Current alcohol consumption:
+						</cell>
+						<cell>
+							<intbox
+								value="@{controller.sessionInfo.alcoholConsumption}" cols="2" /> drinks per
+								
+								<listbox id="alcoholFrequencyOfUseLb"
+								rows="1" mold="select"
+								selectedItem="@{controller.sessionInfo.alcoholFrequencyOfUse}">
+								<listitem label="none" value="" />
+								<listitem label="day" value="day" />
+								<listitem label="week" value="week" />
+								<listitem label="month" value="month" />
+							  <listitem label="year" value="year" />
+							</listbox>
+						</cell>
+					</row>
+					<row>
+						<cell width="200px">
+							History of alcohol abuse:
+						</cell>
+						<cell>
+							<radiogroup
+								value="@{controller.sessionInfo.historyOfAlcoholAbuse}"
+								selectedItem="@{controller.sessionInfo.historyOfAlcoholAbuse, converter=com.loquatic.cerescan.common.RadiogroupBooleanConverter}">
+								<radio label="Yes" value="true" />
+								<radio label="No" value="false" />
+							</radiogroup>
+						</cell>
+					</row>
+					<row>
+						<cell width="200px">
+							Alcohol abuse description:
+						</cell>
+						<cell>
+							<textbox
+								value="@{controller.sessionInfo.alcoholAbuseDescription}"
+								cols="60" />
+						</cell>
+					</row>
+					<row>
+						<cell width="200px">
+							Current recreational drug use:
+						</cell>
+						<cell>
+							<intbox
+								value="@{controller.sessionInfo.drugAbuseDescription}"
+								cols="5" />
+							per
+
+				      <listbox 
+				            selectedItem="@{controller.sessionInfo.drugAbuseDescriptionQualifier}"
+				            id="recreationalDrugUseQualifierLb" 
+                    rows="1"
+                    mold="select">
+                  <listitem label="none" value="" /> 
+                  <listitem label="day" value="day" /> 
+                  <listitem label="week" value="week" /> 
+                  <listitem label="month" value="month" /> 
+                  <listitem label="year" value="year" />
+              </listbox>
+						</cell>
+					</row>
+					<row valign="top">
+            <cell width="200px">
+              Category of recreational drugs in use:
+            </cell>					
+					  <cell>
+              <listbox id="recreationalDrugs"
+                model="@{controller.allRecreationalDrugs}" 
+                pagingPosition="both" 
+                checkmark="true" multiple="true"
+                selectedItem="@{controller.selectedRecreationalDrugs, converter=com.loquatic.cerescan.common.SelectedItemsConverterV3}" tooltiptext="Hold down CTRL to select multiple checkboxes">
+                <listitem self="@{each=allRecerationDrugs}"
+                  value="@{allRecerationDrugs}">
+                  <listcell
+                    label="@{allRecerationDrugs.name}" />
+                </listitem>
+              </listbox>
+            </cell>
+            </row>
+					<row>
+						<cell width="200px">
+							History of recreational drug use or abuse:
+						</cell>
+						<cell>
+							<radiogroup
+								value="@{controller.sessionInfo.historyOfRecreationDrugUse}"
+								selectedItem="@{controller.sessionInfo.historyOfRecreationDrugUse, converter=com.loquatic.cerescan.common.RadiogroupBooleanConverter}">
+								<radio label="Yes" value="true" />
+								<radio label="No" value="false" />
+							</radiogroup>
+						</cell>
+					</row>
+          <row valign="top">
+            <cell width="200px">
+              Category of past recreational drugs in use:
+            </cell>         
+            <cell>
+              <listbox id="pastRecreationalDrugs"
+                model="@{controller.allRecreationalDrugs}" 
+                pagingPosition="both" 
+                checkmark="true" multiple="true"
+                selectedItem="@{controller.selectedPastRecreationalDrugs, converter=com.loquatic.cerescan.common.SelectedItemsConverterV3}" tooltiptext="Hold down CTRL to select multiple checkboxes">
+                <listitem self="@{each=allRecerationDrugs}"
+                  value="@{allRecerationDrugs}">
+                  <listcell
+                    label="@{allRecerationDrugs.name}" />
+                </listitem>
+              </listbox>
+            </cell>
+          </row>
+          <row  valign="top">
+            <cell width="200px">
+              Recreational drug use or abuse description:
+            </cell>
+            <cell>
+              <textbox
+                value="@{controller.sessionInfo.recreationalDrugAbuseNotes}"
+                cols="60" rows="10" />
+            </cell>
+          </row>  
+					<row>
+						<cell width="200px">Current nicotine use:</cell>
+						<cell>
+							<listbox id="nicotineUseLb" rows="1"
+								mold="select"
+								selectedItem="@{controller.sessionInfo.typeOfNicotineUsed}">
+								<listitem label="none" value="" />
+								<listitem label="cigarette packs"
+									value="cigarette_packs" />
+								<listitem label="cigars" value="cigars" />
+								<listitem label="chewing tobacco"
+									value="chewing_tobacco" />
+								<listitem label="patch" value="patch" />
+								<listitem label="gum" value="gum" />
+							</listbox>
+						</cell>
+					</row>
+					<row>
+						<cell width="200px">Quantity used:</cell>
+						<cell>
+							<listbox id="nicotineQuantityUseLb" rows="1"
+								mold="select"
+								selectedItem="@{controller.sessionInfo.quantityNicotineUsed}">
+								<listitem label="none" value="" />
+								<listitem label="&lt;1" value="&lt;1" />
+								<listitem label="1" value="1" />
+								<listitem label="2" value="2" />
+								<listitem label="3" value="3" />
+								<listitem label="4" value="4" />
+								<listitem label="5" value="5" />
+								<listitem label="6" value="6" />
+							</listbox>
+						</cell>
+					</row>
+					<row>
+						<cell width="200px">Frequency of use:</cell>
+						<cell>
+							<listbox id="nicotineFrequencyOfUseLb"
+								rows="1" mold="select"
+								selectedItem="@{controller.sessionInfo.frequencyOfNicotineUsed}">
+								<listitem label="none" value="" />
+								<listitem label="daily" value="daily" />
+								<listitem label="weekly" value="weekly" />
+								<listitem label="monthly"
+									value="monthly" />
+							</listbox>
+						</cell>
+					</row>
+					<row>
+						<cell width="200px">Years of use:</cell>
+						<cell>
+							<listbox id="nicotineYearsOfUseLb" rows="1"
+								mold="select"
+								selectedItem="@{controller.sessionInfo.yearsNicotineUsed}">
+								<listitem label="none" value="" />
+								<listitem label="&lt;1" value="&lt;1" />
+								<listitem label="1 - 4" value="1-4" />
+								<listitem label="5 - 10" value="5-10" />
+								<listitem label="11 - 20" value="11-20" />
+								<listitem label="&gt;20" value="&gt;20" />
+							</listbox>
+						</cell>
+					</row>
+					<row>
+						<cell width="200px">
+							Current caffeine consumption:
+						</cell>
+						<cell>
+							<intbox
+								value="@{controller.sessionInfo.currentCaffieneUse}" cols="2" />
+							(per day)
+						</cell>
+					</row>
+				</rows>
+			</grid>
+		</groupbox>
+		<separator />
+		<groupbox mold="3d">
+			<caption label="History of Prescription Drug Abuse" />
+			<grid>
+				<rows>
+					<row  valign="top">
+						<cell width="200px">
+							Prescription Drug Abuse:
+						</cell>
+						<cell>
+							<listbox id="drugAbuseLb"
+								model="@{controller.allDrugAbuse}" checkmark="true"
+								multiple="true" width="200px"
+								selectedItem="@{controller.selectedDrugAbuse, converter=com.loquatic.cerescan.common.SelectedItemsConverterV3}"
+								tooltiptext="Hold down CTRL to select multiple checkboxes">
+								<listitem self="@{each=drugAbuse}"
+									value="@{drugAbuse}">
+									<listcell label="@{drugAbuse.name}" />
+								</listitem>
+							</listbox>
+						</cell>
+					</row>
+					<row  valign="top">
+						<cell width="200px">
+							Prescription Drug Abuse Description:
+						</cell>
+						<cell>
+							<textbox
+								value="@{controller.sessionInfo.prescriptionDrugAbuse}"
+								cols="60" rows="10" />
+						</cell>
+					</row>
+				</rows>
+			</grid>
+		</groupbox>
+		<separator />
+		<groupbox mold="3d">
+			<caption label="Notes" />
+			<textbox value="@{controller.sessionInfo.substanceUseNote}"
+				cols="60" rows="10" />
+		</groupbox>
+		<separator />
+		<button id="updateBtn" label="Update" sclass="update" />
+	</window>
+</zk>

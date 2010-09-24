@@ -1,0 +1,18 @@
+<zk xmlns="http://www.zkoss.org/2005/zul"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.zkoss.org/2005/zul http://www.zkoss.org/2005/zul/zul.xsd">
+	<?page title="Patient Information" style="height:100%"?>
+	<borderlayout style="background:#c5e6ef;" id="patientBl">
+		<north size="20px" border="0" style="background:#c5e6ef;">
+			<include src="/secure/common/topMenu.zul" />
+		</north>
+		<west width="220px" border="0" collapsible="true"
+			autoscroll="true" style="background:#c5e6ef;" title="Navigation">
+			<include src="/secure/common/navigation.zul" />
+		</west>
+		<center id="center" autoscroll="true">
+			<include id="main"
+				src="/secure/patient/editPatientDemographics.zul" />
+		</center>
+	</borderlayout>
+</zk>

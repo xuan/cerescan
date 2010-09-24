@@ -1,0 +1,47 @@
+<?page contentType="text/html;charset=UTF-8"?>
+<zk>
+	<menubar>
+		<menuitem label="Home" href="/secure/index.zul"
+			tooltiptext="Exit of of this patient data" />
+		<menuitem label="Search"
+			tooltiptext="Search for a new Patient">
+			<attribute name="onClick">
+	{
+		final Window win = (Window) Executions.createComponents(
+				"/secure/dashboard.zul", null, null);
+		win.setClosable(true);
+		win.doModal();
+	}
+</attribute>
+		</menuitem>
+		<menu label="Tools" tooltiptext="Manage global data">
+			<menupopup>
+				<menuitem label="Manange Attorneys">
+					<attribute name="onClick">
+	{
+		final Window win = (Window) Executions.createComponents(
+				"/secure/global/editAttorney.zul", null, null);
+		win.setClosable(true);
+		win.doModal();
+	}
+</attribute>
+
+				</menuitem>
+				<menuitem label="Manange Physicians and Treatment Providers">
+					<attribute name="onClick">
+	{
+		final Window win = (Window) Executions.createComponents(
+				"/secure/global/editPhysician.zul", null, null);
+		win.setClosable(true);
+		win.doModal();
+	}
+</attribute>
+				</menuitem>
+				<menuitem label="Tarascon Medication Lookup"
+					href="http://web.tarascon.com" target="_blank" />
+			</menupopup>
+		</menu>
+		<menuitem tooltiptext="Logout of System" label="Logout"
+			href="/j_spring_security_logout" />
+	</menubar>
+</zk>

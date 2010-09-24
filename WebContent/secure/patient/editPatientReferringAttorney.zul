@@ -1,0 +1,189 @@
+<zk xmlns="http://www.zkoss.org/2005/zul"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.zkoss.org/2005/zul http://www.zkoss.org/2005/zul/zul.xsd">
+	<?page title="Edit Patient Referring Attorney Information"?>
+	<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" arg0="editPatientReferringAttorneyWin"?>
+	<?component name="error" extends="label" class="com.loquatic.cerescan.view.ErrorLabel"?>
+	<window title="Edit Patient Referring Attorney Information"
+		border="normal" id="editPatientReferringAttorneyWin" width="900px"
+		apply="com.loquatic.cerescan.controller.patient.EditPatientReferringAttorneyController">
+		<caption>
+			<toolbarbutton label="Help"  href="../../../manual/index.php/Patient_Referring_Attorney_Information" target="manual"/>
+		</caption>
+		<error id="errLbl" style="color:#DD7870" multiline="true" />
+		<label id="successLbl" style="color:green" multiline="true"
+			action="onshow: anima.fade(#{self}); onhide: anima.fade(#{self})" />
+		<groupbox mold="3d">
+			<caption label="Attorneys" />
+			<listbox id="selectedAttorneysLb" multiple="false"
+				model="@{controller.selectedAttorneys}">
+				<listhead sizable="true">
+					<listheader width="10px"></listheader>
+					<listheader></listheader>
+				</listhead>
+				<listitem self="@{each='attorney'}"
+					value="@{attorney}">
+					<listcell></listcell>
+					<listcell>
+						<separator />
+						<grid>
+							<rows>
+								<row>
+									<cell width="100px">
+										Last Name:
+									</cell>
+									<cell>
+										<label
+											value="@{attorney.lastName}" />
+									</cell>
+									<cell width="100px">
+										First Name:
+									</cell>
+									<cell>
+										<label
+											value="@{attorney.firstName}" />
+									</cell>
+								</row>
+								<row>
+									<cell>Firm Name:</cell>
+									<cell colspan="3">
+										<label
+											value="@{attorney.firmName}" />
+									</cell>
+								</row>
+								<row>
+									<cell>Phone:</cell>
+									<cell>
+										<label
+											value="@{attorney.workPhone}" />
+									</cell>
+									<cell>Fax:</cell>
+									<cell>
+										<label
+											value="@{attorney.faxPhone}" />
+									</cell>
+								</row>
+								<row>
+									<cell>Email:</cell>
+									<cell colspan="3">
+										<label
+											value="@{attorney.email1}" />
+									</cell>
+								</row>
+								<row>
+									<cell width="100px">Address:</cell>
+									<cell colspan="3">
+										<label
+											value="@{attorney.addresses, converter='com.loquatic.cerescan.common.AddressConverter'}"
+											multiline="true" />
+									</cell>
+								</row>
+							</rows>
+						</grid>
+						<separator />
+					</listcell>
+				</listitem>
+			</listbox>
+			<separator />
+			<button id="deleteBtn" label="Delete Selection"
+				visible="false" />
+			<separator />
+		</groupbox>
+		<separator />
+		<groupbox mold="3d">
+			<caption label="Attorney Search" />
+			<grid>
+				<rows>
+					<row>
+						<cell>Search for Attorney Last Name:</cell>
+						<cell>
+							<textbox id="searchLastNameTb" focus="true" />
+						</cell>
+						<cell>
+							<button id="searchLastNameBtn"
+								label="Search" />
+						</cell>
+					</row>
+				</rows>
+			</grid>
+		</groupbox>
+		<div id="searchResult" visible="false"
+			action="onshow: anima.fade(#{self}); onhide: anima.fade(#{self})">
+			<separator />
+			<groupbox mold="3d">
+				<caption label="Attorney Search Result" />
+				<listbox id="searchResultLb"
+					model="@{controller.attornies}">
+					<listhead sizable="true">
+						<listheader width="10px"></listheader>
+						<listheader></listheader>
+					</listhead>
+					<listitem self="@{each='attorney'}"
+						value="@{attorney}">
+						<listcell></listcell>
+						<listcell>
+							<separator />
+							<grid>
+								<rows>
+									<row>
+										<cell width="100px">
+											Last Name:
+										</cell>
+										<cell>
+											<label
+												value="@{attorney.lastName}" />
+										</cell>
+										<cell width="100px">
+											First Name:
+										</cell>
+										<cell>
+											<label
+												value="@{attorney.firstName}" />
+										</cell>
+									</row>
+									<row>
+										<cell>Firm Name:</cell>
+										<cell colspan="3">
+											<label
+												value="@{attorney.firmName}" />
+										</cell>
+									</row>
+									<row>
+										<cell>Phone:</cell>
+										<cell>
+											<label
+												value="@{attorney.workPhone}" />
+										</cell>
+										<cell>Fax:</cell>
+										<cell>
+											<label
+												value="@{attorney.faxPhone}" />
+										</cell>
+									</row>
+									<row>
+										<cell>Email:</cell>
+										<cell colspan="3">
+											<label
+												value="@{attorney.email1}" />
+										</cell>
+									</row>
+									<row>
+										<cell width="100px">
+											Address:
+										</cell>
+										<cell colspan="3">
+											<label
+												value="@{attorney.addresses, converter='com.loquatic.cerescan.common.AddressConverter'}"
+												multiline="true" />
+										</cell>
+									</row>
+								</rows>
+							</grid>
+							<separator />
+						</listcell>
+					</listitem>
+				</listbox>
+			</groupbox>
+		</div>
+	</window>
+</zk>

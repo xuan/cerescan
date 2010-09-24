@@ -1,0 +1,10 @@
+<?page title="Version" contentType="text/html;charset=UTF-8"?>
+<zk>
+	<window title="Version" border="normal" width="300">
+		<vbox>
+			<label
+				value="You are using ZK Version: ${desktop.webApp.version}" />
+			<label value="You are using rsbry:  $Rev: 259 $" />
+		</vbox>
+	</window>
+</zk>

@@ -1,0 +1,129 @@
+<zk xmlns="http://www.zkoss.org/2005/zul"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.zkoss.org/2005/zul http://www.zkoss.org/2005/zul/zul.xsd">
+	<?page title="Edit Patient Developmental History"?>
+	<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" arg0="editDevelopmentHistoryWin"?>
+	<?component name="error" extends="label" class="com.loquatic.cerescan.view.ErrorLabel"?>
+	<window title="Patient Developmental History" border="normal"
+		id="editDevelopmentHistoryWin" width="900px"
+		apply="com.loquatic.cerescan.controller.patient.EditPatientDevelopmentHistoryController">
+		<caption>
+			<toolbarbutton label="Help" href="../../../manual/index.php/Patient_Developmental_History" target="manual"/>
+		</caption>
+		<error id="errLbl" style="color:#DD7870" multiline="true" />
+		<label id="successLbl" style="color:green" multiline="true" />
+		<groupbox mold="3d">
+			<caption label="Birth Trauma" />
+			<grid>
+				<rows>
+					<row valign="top">
+						<cell>
+							<listbox id="birthTraumasLb"
+								model="@{controller.allBirthTraumas}" checkmark="true"
+								multiple="true"
+								selectedItem="@{controller.selectedBirthTraumas, converter=com.loquatic.cerescan.common.SelectedItemsConverterV3}"
+								tooltiptext="Hold down CTRL to select multiple checkboxes">
+								<listitem self="@{each=allBirthTraumas}"
+									value="@{allBirthTraumas}">
+									<listcell
+										label="@{allBirthTraumas.name}" />
+								</listitem>
+							</listbox>
+						</cell>
+					</row>
+				</rows>
+			</grid>
+		</groupbox>
+		<separator />
+		<groupbox mold="3d">
+			<caption label="Developmental Milestones" />
+			<grid>
+				<rows>
+					<row valign="top">
+						<cell>
+							<listbox id="developmentMilestoneLb"
+								model="@{controller.allDevelopmentMilestones}" checkmark="true"
+								multiple="true"
+								selectedItem="@{controller.selectedDevelopmentMilestones, converter=com.loquatic.cerescan.common.SelectedItemsConverterV3}"
+								tooltiptext="Hold down CTRL to select multiple checkboxes">
+								<listitem
+									self="@{each=allDevelopmentMilestones}"
+									value="@{allDevelopmentMilestones}">
+									<listcell
+										label="@{allDevelopmentMilestones.name}" />
+								</listitem>
+							</listbox>
+						</cell>
+
+					</row>
+				</rows>
+			</grid>
+		</groupbox>
+		<separator />
+
+		<groupbox mold="3d">
+			<caption label="Developmental Trauma" />
+			<grid>
+				<rows>
+					<row valign="top">
+						<cell>
+							<listbox id="developmentTraumasLb"
+								model="@{controller.allDevelopmentTraumas}" checkmark="true"
+								multiple="true"
+								selectedItem="@{controller.selectedDevelopmentTraumas, converter=com.loquatic.cerescan.common.SelectedItemsConverterV3}"
+								tooltiptext="Hold down CTRL to select multiple checkboxes">
+								<listitem
+									self="@{each=allDevelopmentTraumas}"
+									value="@{allDevelopmentTraumas}">
+									<listcell
+										label="@{allDevelopmentTraumas.name}" />
+								</listitem>
+							</listbox>
+						</cell>
+					</row>
+				</rows>
+			</grid>
+		</groupbox>
+		<separator />
+
+		<groupbox mold="3d">
+			<caption label="Additional Developmental Information" />
+			<grid>
+				<rows>
+					<row>
+						<cell width="150px">Adoptee:</cell>
+						<cell>
+							<radiogroup
+								value="@{controller.sessionInfo.adoptee}"
+								selectedItem="@{controller.sessionInfo.adoptee, converter=com.loquatic.cerescan.common.RadiogroupBooleanConverter}"
+								tooltiptext="Hold down CTRL to select multiple checkboxes">
+								<radio label="Yes" value="true" />
+								<radio label="No" value="false" />
+							</radiogroup>
+						</cell>
+					</row>
+					<row>
+						<cell width="150px">
+							Medical Disorders in Childhood:
+						</cell>
+						<cell>
+							<textbox cols="60" rows="10"
+								value="@{controller.sessionInfo.medicalDisordersInChildhood}" />
+						</cell>
+					</row>
+					<row>
+						<cell width="150px">
+							Additional Developmental Notes:
+						</cell>
+						<cell>
+							<textbox cols="60" rows="10"
+								value="@{controller.sessionInfo.additionalDevelopmentNotes}" />
+						</cell>
+					</row>
+				</rows>
+			</grid>
+		</groupbox>
+		<separator />
+		<button id="updateBtn" label="Update" sclass="update" />
+	</window>
+</zk>

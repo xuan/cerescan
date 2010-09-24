@@ -1,0 +1,194 @@
+<zk>
+	<groupbox mold="3d">
+		<caption label="Physicians" />
+		<listbox id="selectedPhysiciansLb" multiple="false"
+			model="@{controller.selectedPhysicians}">
+			<listhead sizable="true">
+				<listheader width="10px"></listheader>
+				<listheader></listheader>
+			</listhead>
+			<listitem self="@{each='physician'}" value="@{physician}">
+				<listcell></listcell>
+				<listcell>
+					<separator />
+					<grid>
+						<rows>
+							<row>
+								<cell width="100px">Last Name:</cell>
+								<cell>
+									<label
+										value="@{physician.lastName}" />
+								</cell>
+								<cell width="100px">First Name:</cell>
+								<cell>
+									<label
+										value="@{physician.firstName}" />
+								</cell>
+							</row>
+							<row>
+								<cell>Degree:</cell>
+								<cell>
+									<label
+										value="@{physician.degree.name}" />
+								</cell>
+
+								<cell>Practice Name:</cell>
+								<cell>
+									<label id="practiceNameLb"
+										value="@{physician.practiceName}" />
+								</cell>
+							</row>
+							<row>
+								<cell>Specialty Name:</cell>
+								<cell>
+									<label id="specialityLb"
+										value="@{physician.speciality}" />
+								</cell>
+								<cell>NPI Number:</cell>
+								<cell>
+									<label id="npiNumberLb"
+										value="@{physician.npiNumber}" />
+								</cell>
+							</row>
+							<row>
+								<cell>Phone:</cell>
+								<cell>
+									<label
+										value="@{physician.workPhone}" />
+								</cell>
+								<cell>Fax:</cell>
+								<cell>
+									<label
+										value="@{physician.faxPhone}" />
+								</cell>
+							</row>
+							<row>
+								<cell>Email:</cell>
+								<cell colspan="3">
+									<label value="@{physician.email1}" />
+								</cell>
+							</row>
+							<row>
+								<cell width="100px">Address:</cell>
+								<cell colspan="3">
+									<label
+										value="@{physician.addresses, converter='com.loquatic.cerescan.common.AddressConverter'}"
+										multiline="true" />
+								</cell>
+							</row>
+						</rows>
+					</grid>
+					<separator />
+				</listcell>
+			</listitem>
+		</listbox>
+		<separator />
+		<button id="deleteBtn" label="Delete Selection" visible="false" />
+		<separator />
+	</groupbox>
+	<separator />
+	<groupbox mold="3d">
+		<caption label="Physician Search" />
+		<grid>
+			<rows>
+				<row>
+					<cell>Search for Physician Last Name:</cell>
+					<cell>
+						<textbox id="searchLastNameTb" focus="true" />
+					</cell>
+					<cell>
+						<button id="searchLastNameBtn" label="Search" />
+					</cell>
+				</row>
+			</rows>
+		</grid>
+	</groupbox>
+	<div id="searchResult" visible="false"
+		action="onshow: anima.fade(#{self}); onhide: anima.fade(#{self})">
+		<separator />
+		<groupbox mold="3d">
+			<caption label="Physician Search Result" />
+			<listbox id="searchResultLb"
+				model="@{controller.attornies}">
+				<listhead sizable="true">
+					<listheader width="10px"></listheader>
+					<listheader></listheader>
+				</listhead>
+				<listitem self="@{each='physician'}"
+					value="@{physician}">
+					<listcell></listcell>
+					<listcell>
+						<separator />
+						<grid>
+							<rows>
+								<row>
+									<cell width="100px">
+										Last Name:
+									</cell>
+									<cell>
+										<label
+											value="@{physician.lastName}" />
+									</cell>
+									<cell width="100px">
+										First Name:
+									</cell>
+									<cell>
+										<label
+											value="@{physician.firstName}" />
+									</cell>
+								</row>
+								<row>
+								<cell>Practice Name:</cell>
+								<cell colspan="3">
+									<label
+										value="@{physician.practiceName}" />
+								</cell>
+							</row>
+							<row>
+								<cell>Specialty Name:</cell>
+								<cell>
+									<label
+										value="@{physician.speciality}" />
+								</cell>
+								<cell>NPI Number:</cell>
+								<cell>
+									<label
+										value="@{physician.npiNumber}" />
+								</cell>
+							</row>
+								<row>
+									<cell>Phone:</cell>
+									<cell>
+										<label
+											value="@{physician.workPhone}" />
+									</cell>
+									<cell>Fax:</cell>
+									<cell>
+										<label
+											value="@{physician.faxPhone}" />
+									</cell>
+								</row>
+								<row>
+									<cell>Email:</cell>
+									<cell colspan="3">
+										<label
+											value="@{physician.email1}" />
+									</cell>
+								</row>
+								<row>
+									<cell width="100px">Address:</cell>
+									<cell colspan="3">
+										<label
+											value="@{physician.addresses, converter='com.loquatic.cerescan.common.AddressConverter'}"
+											multiline="true" />
+									</cell>
+								</row>
+							</rows>
+						</grid>
+						<separator />
+					</listcell>
+				</listitem>
+			</listbox>
+		</groupbox>
+	</div>
+</zk>

@@ -1,0 +1,116 @@
+<zk xmlns="http://www.zkoss.org/2005/zul"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.zkoss.org/2005/zul http://www.zkoss.org/2005/zul/zul.xsd">
+	<?page title="Edit Traumatic Brain Injury"?>
+	<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" arg0="editPatientTraumaticBrainInjuryWin"?>
+	<?component name="error" extends="label" class="com.loquatic.cerescan.view.ErrorLabel"?>
+	<window title="Patient Traumatic Brain Injury" border="normal"
+		id="editPatientTraumaticBrainInjuryWin" width="900px"
+		apply="com.loquatic.cerescan.controller.patient.EditPatientTraumaticBrainInjuryController">
+		<caption>
+			<toolbarbutton label="Help"  href="../../../manual/index.php/Patient_Traumatic_Brain_Injury" target="manual"/>
+		</caption>
+		<error id="errLbl" style="color:#DD7870" multiline="true" />
+		<label id="successLbl" style="color:green" multiline="true" />
+		<groupbox mold="3d">
+			<caption label="Traumatic Brain Injury History" />
+			<listbox id="traumaticBrainInjuriesLb"
+				model="@{controller.traumaticBrainInjuries}">
+				<listhead>
+					<listheader label="Type" />
+					<listheader label="Loss of consciousness" />
+					<listheader label="Posttraumatic Amnesia" />
+					<listheader label="Physical Injury" />
+					<listheader label="Additional Description" />
+				</listhead>
+				<listitem self="@{each='traumaticBrainInjuries'}" value="@{traumaticBrainInjuries}">
+					<listcell
+						label="@{traumaticBrainInjuries.TraumaticBrainInjuryType.name}" />
+					<listcell
+						label="@{traumaticBrainInjuries.lossOfConsciousness.name}" />
+					<listcell
+						label="@{traumaticBrainInjuries.postTraumaticAmnesia.name}" />
+					<listcell
+						label="@{traumaticBrainInjuries.physicalInjury.name}" />
+					<listcell
+						label="@{traumaticBrainInjuries.description}" />
+				</listitem>
+			</listbox>
+			<separator />
+			<button id="deleteBtn" label="Delete Selection"
+				visible="false" />
+			<separator />
+			<grid>
+				<rows>
+					<row>
+						<cell width="200px">Types:</cell>
+						<cell>
+							<listbox id="traumaticBrainInjuryTypeLb"
+								rows="1" mold="select"
+								model="@{controller.allTraumaticBrainInjuryTypes}">
+								<listitem
+									self="@{each=allTraumaticBrainInjuryTypes}"
+									value="@{allTraumaticBrainInjuryTypes}"
+									label="@{allTraumaticBrainInjuryTypes.name}" />
+							</listbox>
+						</cell>
+					</row>
+					<row>
+						<cell>
+							Loss of consciousness:
+						</cell>
+						<cell>
+							<listbox id="lossConsciousnessLb"
+								rows="1" mold="select"
+								model="@{controller.allLossConsciousness}">
+								<listitem
+									self="@{each=allLossConsciousness}"
+									value="@{allLossConsciousness}"
+									label="@{allLossConsciousness.name}" />
+							</listbox>
+						</cell>
+					</row>
+					<row>
+						<cell>
+							Posttraumatic Amnesia:
+						</cell>
+						<cell>
+							<listbox id="traumaticAmnesiaLb"
+								rows="1" mold="select"
+								model="@{controller.allTraumaticAmnesias}">
+								<listitem
+									self="@{each=allTraumaticAmnesias}"
+									value="@{allTraumaticAmnesias}"
+									label="@{allTraumaticAmnesias.name}" />
+							</listbox>
+						</cell>
+					</row>
+					<row>
+						<cell>Physical Injury:</cell>
+						<cell>
+							<listbox id="physicalInjuryLb"
+								rows="1" mold="select"
+								model="@{controller.allPhysicalInjuries}">
+								<listitem
+									self="@{each=allPhysicalInjuries}"
+									value="@{allPhysicalInjuries}"
+									label="@{allPhysicalInjuries.name}" />
+							</listbox>
+						</cell>
+					</row>
+					<row>
+						<cell width="200px">
+							Additional Description:
+						</cell>
+						<cell>
+							<textbox id="additionalDescriptionTb"
+								cols="60" value="${controller.traumaticBrainInjury.description}"/>
+						</cell>
+					</row>
+				</rows>
+			</grid>
+			<separator />
+			<button id="addBtn" label="Add" />
+		</groupbox>
+	</window>
+</zk>
